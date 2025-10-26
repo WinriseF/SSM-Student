@@ -21,4 +21,14 @@ public class StudentService {
                 "（" + student.getGender() + "，" + student.getAge() +
                 " 岁，" + student.getGrade() + "）";
     }
+
+    public void addStudent(Student student) {
+        // 添加学生的逻辑
+        System.out.println("添加学生：" + student.getName());
+    }
+
+    public void deleteStudent(Integer id) {
+        // 删除学生的逻辑
+        System.out.println("删除学生：" + student.getName());
+    }
 }
