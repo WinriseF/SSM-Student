@@ -12,13 +12,6 @@
 
     <context:component-scan base-package="com.java"/>
 
-    <bean id="logAspect" class="com.java.aspect.LogAspect"/>
+    <aop:aspectj-autoproxy/>
 
-    <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.java.service.StudentService.*(..))"/>
-
-        <aop:aspect ref="logAspect">
-            <aop:before method="logBefore" pointcut-ref="serviceMethods"/>
-        </aop:aspect>
-    </aop:config>
 </beans>
