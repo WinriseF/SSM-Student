@@ -14,15 +14,38 @@
 
     <aop:aspectj-autoproxy/>
 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <!-- 1. 配置主数据源 (Master) -->
+    <bean id="masterDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://119.91.35.26:3306/ssm-student"/>
-        <property name="username" value="ssm-student"/>
-        <property name="password" value="m4b8KK4wFwDF8fwB"/>
+        <property name="url" value="jdbc:mysql://119.91.35.26:3306/master_db?useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="username" value="master_db"/>
+        <property name="password" value="GySYprph6h4tYKEB"/>
     </bean>
 
+    <!-- 2. 配置从数据源 (Slave) -->
+    <bean id="slaveDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://119.91.35.26:3306/slave_db?useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="username" value="slave_db"/>
+        <property name="password" value="GySYprph6h4tYKEB"/>
+    </bean>
+
+    <!-- 3. 配置动态数据源路由器 -->
+    <bean id="dynamicDataSource" class="com.java.datasource.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <!-- key就是查找键，value是真正的数据源bean -->
+                <entry key="master" value-ref="masterDataSource"/>
+                <entry key="slave" value-ref="slaveDataSource"/>
+            </map>
+        </property>
+        <!-- 指定默认的数据源，当查找键找不到时，默认使用主库 -->
+        <property name="defaultTargetDataSource" ref="masterDataSource"/>
+    </bean>
+
+    <!-- 4. 将JdbcTemplate的数据源指向动态数据源 -->
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dynamicDataSource"/>
     </bean>
 
 </beans>
