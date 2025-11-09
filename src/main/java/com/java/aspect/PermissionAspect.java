@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class PermissionAspect {
 
-    @Before("execution(* com.java.service.StudentService.*(..))")
+    @Before("execution(* com.base.service.StudentService.*(..))")
     public void checkPermission(JoinPoint joinPoint) {
         System.out.println("权限检查通过");
     }

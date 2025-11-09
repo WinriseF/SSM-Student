@@ -1,45 +1,44 @@
+// 文件路径: /ssm-student/src/main/java/com/java/service/StudentService.java
 package com.java.service;
 
+import com.java.dao.StudentDao;
 import com.java.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentService {
+
     @Autowired
-    private Student student;
-
-    public String getStudentInfo() {
-
-        student.setId("1001");
-        student.setName("张三");
-        student.setGender("男");
-        student.setAge(20);
-        student.setGrade("2023 级计算机班");
-
-        return "学号 " + student.getId() + "：" + student.getName() +
-                "（" + student.getGender() + "，" + student.getAge() +
-                " 岁，" + student.getGrade() + "）";
-    }
+    private StudentDao studentDao; // 注入DAO层
 
     public void addStudent(Student student) {
-        // 添加学生的逻辑
-        System.out.println("添加学生：" + student.getName() + "，ID：" + student.getId());
+        System.out.println(">>> [Service] 准备添加学生: " + student.getName());
+        studentDao.addStudent(student);
+        System.out.println(">>> [Service] 学生添加成功");
     }
 
     public void deleteStudent(Integer id) {
-        // 删除学生的逻辑
-        System.out.println("删除学生：" + student.getName() + "，ID：" + id);
+        System.out.println(">>> [Service] 准备删除ID为 " + id + " 的学生");
+        studentDao.deleteStudentById(id);
+        System.out.println(">>> [Service] 学生删除成功");
     }
 
-    public void deleteStudentTemp(Integer id) {
-        // 删除学生的逻辑
-        System.out.println("删除学生 Temp：" + student.getName() + "，ID：" + id);
+    public void updateStudent(Student student) {
+        System.out.println(">>> [Service] 准备更新学生: " + student.getName());
+        studentDao.updateStudent(student);
+        System.out.println(">>> [Service] 学生更新成功");
     }
 
-    public void updateStudentTemp(Student student) {
-        // 更新学生的逻辑
-        System.out.println("更新学生 Temp：" + student.getName() + "，ID：" + student.getId());
+    public Student getStudentById(Integer id) {
+        System.out.println(">>> [Service] 准备查询ID为 " + id + " 的学生");
+        return studentDao.getStudentById(id);
     }
 
+    public List<Student> getAllStudents() {
+        System.out.println(">>> [Service] 准备查询所有学生");
+        return studentDao.getAllStudents();
+    }
 }

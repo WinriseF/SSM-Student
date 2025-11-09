@@ -20,7 +20,7 @@
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://119.91.35.26:3306/master_db?useSSL=false&amp;serverTimezone=UTC"/>
         <property name="username" value="master_db"/>
-        <property name="password" value="GySYprph6h4tYKEB"/>
+        <property name="password" value="HizPicdYT3eXeH2J"/>
     </bean>
 
     <!-- 2. 配置从数据源 (Slave) -->
@@ -28,7 +28,7 @@
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://119.91.35.26:3306/slave_db?useSSL=false&amp;serverTimezone=UTC"/>
         <property name="username" value="slave_db"/>
-        <property name="password" value="GySYprph6h4tYKEB"/>
+        <property name="password" value="WnLpAGZYF6ibzy6S"/>
     </bean>
 
     <!-- 3. 配置动态数据源路由器 -->
