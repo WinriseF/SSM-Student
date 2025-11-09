@@ -12,19 +12,19 @@ public class Main {
 
         StudentService studentService = (StudentService) context.getBean("studentService");
 
+        System.out.println("------ 1. 测试内存添加学生 ------");
         Student newStudent = new Student();
         newStudent.setId("1002");
         newStudent.setName("李四");
+        studentService.addStudent(newStudent); // 这个方法也会被拦截
 
-        studentService.addStudent(newStudent);
+        System.out.println("\n------ 2. 测试内存删除学生 ------");
+        studentService.deleteStudentTemp(1002);
 
-        System.out.println("------------------------------");
-
-        studentService.deleteStudent(1002);
-
-        System.out.println("------------------------------");
-
-        String studentInfo = studentService.getStudentInfo();
-        System.out.println(studentInfo);
+        System.out.println("\n------ 3. 测试内存更新学生 ------");
+        Student studentToUpdate = new Student();
+        studentToUpdate.setId("1003");
+        studentToUpdate.setName("王五");
+        studentService.updateStudentTemp(studentToUpdate);
     }
 }

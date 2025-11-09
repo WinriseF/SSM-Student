@@ -24,11 +24,22 @@ public class StudentService {
 
     public void addStudent(Student student) {
         // 添加学生的逻辑
-        System.out.println("添加学生：" + student.getName());
+        System.out.println("添加学生：" + student.getName() + "，ID：" + student.getId());
     }
 
     public void deleteStudent(Integer id) {
         // 删除学生的逻辑
-        System.out.println("删除学生：" + student.getName());
+        System.out.println("删除学生：" + student.getName() + "，ID：" + id);
     }
+
+    public void deleteStudentTemp(Integer id) {
+        // 删除学生的逻辑
+        System.out.println("删除学生 Temp：" + student.getName() + "，ID：" + id);
+    }
+
+    public void updateStudentTemp(Student student) {
+        // 更新学生的逻辑
+        System.out.println("更新学生 Temp：" + student.getName() + "，ID：" + student.getId());
+    }
+
 }
