@@ -12,28 +12,7 @@
 
     <context:component-scan base-package="com.java"/>
 
-<!--    <aop:aspectj-autoproxy/>-->
-
-
-    <!-- 1. 定义切面 Bean：将 LogAspect 交给 Spring 管理 -->
-    <bean id="logAspect" class="com.java.aspect.LogAspect"/>
-
-    <!-- 2. 配置 AOP -->
-    <aop:config>
-        <!-- 3. 定义切入点：匹配 StudentService 类中的所有方法 -->
-        <aop:pointcut id="studentServicePointcut"
-                      expression="execution(* com.java.service.StudentService.*(..))"/>
-
-        <!-- 4. 将切面与切入点关联起来 -->
-        <aop:aspect ref="logAspect">
-            <!-- 5. 配置前置通知：将 logBefore 方法绑定到切入点之前执行 -->
-            <aop:before method="logBefore" pointcut-ref="studentServicePointcut"/>
-
-            <!-- 6. 配置后置通知：将 logAfter 方法绑定到切入点之后执行 -->
-            <aop:after method="logAfter" pointcut-ref="studentServicePointcut"/>
-        </aop:aspect>
-    </aop:config>
-
+    <aop:aspectj-autoproxy/>
 
 
     <!-- 1. 配置主数据源 (Master) -->
