@@ -15,7 +15,7 @@ import java.util.Date;
 @Order(2)
 public class LogAspect {
 
-    @Before("execution(* com.base.service.StudentService.*(..))")
+    @Before("execution(* com.java.service.*.*(..))")
     public void logBefore(JoinPoint joinPoint) {
         System.out.println("方法 " + joinPoint.getSignature().getName() + " 开始执行，参数：" +
                 Arrays.toString(joinPoint.getArgs()) + "，时间：" + new Date());

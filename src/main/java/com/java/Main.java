@@ -12,7 +12,7 @@ public class Main {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         StudentService studentService = context.getBean(StudentService.class);
 
-        // 1. 【写操作】新增一个学生
+        // 【写操作】新增一个学生
         System.out.println("\n=============== 1. 添加一个新学生 '张三' ================");
         Student newStudent = new Student();
         newStudent.setName("张三");
@@ -21,7 +21,7 @@ public class Main {
         newStudent.setGrade("2023级软件工程");
         studentService.addStudent(newStudent);
 
-        // 2. 【读操作】查询所有学生，验证添加
+        // 【读操作】查询所有学生，验证添加
         System.out.println("\n=============== 2. 查询所有学生 (应从从库读取) ================");
         List<Student> students = studentService.getAllStudents();
         students.forEach(System.out::println);
@@ -34,7 +34,7 @@ public class Main {
             e.printStackTrace();
         }
 
-        // 3. 【读操作】再次查询所有学生
+        // 【读操作】再次查询所有学生
         System.out.println("\n=============== 3. 再次查询所有学生 (确认数据已同步) ================");
         List<Student> currentStudents = studentService.getAllStudents();
         currentStudents.forEach(System.out::println);
@@ -51,21 +51,21 @@ public class Main {
         }
         System.out.println("\n成功找到学生 '张三'，ID为：" + zhangsan.getId());
 
-        // 4. 【写操作】更新学生信息
+        // 【写操作】更新学生信息
         System.out.println("\n=============== 4. 更新 '张三' 的年龄为 21 ================");
         zhangsan.setAge(21);
         studentService.updateStudent(zhangsan);
 
-        // 5. 【读操作】根据ID查询，验证更新
+        // 【读操作】根据ID查询，验证更新
         System.out.println("\n=============== 5. 查询 '张三' 的信息 (应从从库读取) ================");
         Student updatedZhangsan = studentService.getStudentById(zhangsan.getId());
         System.out.println("查询到的更新后信息: " + updatedZhangsan);
 
-        // 6. 【写操作】删除学生
+        // 【写操作】删除学生
         System.out.println("\n=============== 6. 删除学生 '张三' ================");
         studentService.deleteStudent(zhangsan.getId());
 
-        // 7. 【读操作】最后一次查询所有学生，验证删除
+        // 【读操作】最后一次查询所有学生，验证删除
         System.out.println("\n=============== 7. 再次查询所有学生，验证'张三'已被删除 ================");
         List<Student> finalStudents = studentService.getAllStudents();
         if (finalStudents.isEmpty()) {

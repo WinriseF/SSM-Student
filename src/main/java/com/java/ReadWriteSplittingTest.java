@@ -12,7 +12,7 @@ public class ReadWriteSplittingTest {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserDao userDao = context.getBean(UserDao.class);
 
-        // 1. 执行写操作
+        // 执行写操作
         System.out.println("------ 1. 开始执行写操作 (addUser) ------");
         User newUser = new User();
         newUser.setName("MasterWriteUser");
@@ -20,7 +20,7 @@ public class ReadWriteSplittingTest {
         userDao.addUser(newUser);
         System.out.println("操作完成。请检查 master_db.user 表，应包含 'MasterWriteUser'。");
 
-        // 2. 模拟主从同步
+        // 模拟主从同步
         System.out.println("\n------ 2. 模拟主从数据同步 ------");
         System.out.println("在真实环境中，数据库会自动同步。");
         System.out.println("为了测试，请手动在 slave_db.user 表中也插入 'MasterWriteUser' 这条记录。");
@@ -31,7 +31,7 @@ public class ReadWriteSplittingTest {
             e.printStackTrace();
         }
 
-        // 3. 执行读操作
+        // 执行读操作
         System.out.println("\n------ 3. 开始执行读操作 (getAllUsers) ------");
         List<User> users = userDao.getAllUsers();
         System.out.println("从从库查询到的用户列表：");
